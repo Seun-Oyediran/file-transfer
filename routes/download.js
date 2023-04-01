@@ -1,20 +1,20 @@
-const router = require('express').Router()
-const File = require('../models/file')
+const router = require("express").Router();
+const File = require("../models/file");
 
-router.get('/:uuid', async (req, res) => {
-
+router.get("/:uuid", async (req, res) => {
   const file = await File.findOne({
-    uuid: req.params.uuid
-  })
+    uuid: req.params.uuid,
+  });
   if (!file) {
-    return res.render('download', {
-      error: 'Incorrect file link'
-    })
+    return res.render("download", {
+      error: "Incorrect file link",
+    });
   }
 
-  const filePath = `${__dirname}/../${file.path}`;
-  res.download(filePath);
+  console.log(file);
 
-})
+  const filePath = `${__dirname}/../${file.path}`;
+  res.download(filePath, file?.filename || file?.uuid);
+});
 
 module.exports = router;
