@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
         error: err.message,
       });
     }
-    console.log(req.file);
+
     const file = new File({
       filename: req.file.originalname,
       uuid: uuid4(),
